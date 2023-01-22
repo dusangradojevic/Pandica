@@ -1,0 +1,36 @@
+<app-header></app-header>
+<hr />
+
+<div class="row">
+  <div class="col-12">
+    <h3>Prijava</h3>
+  </div>
+</div>
+
+<form>
+  <div class="row">
+    <div class="col-12 col-md-4"><b> Korisnicko ime: </b></div>
+    <div class="col-12 col-md-6">
+      <input type="text" name="username" [(ngModel)]="username" />
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12 col-md-4"><b>Lozinka:</b></div>
+    <div class="col-12 col-md-6">
+      <input type="password" name="password" [(ngModel)]="password" />
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12 col-md-4">
+      <input type="button" value="Prijavi se" (click)="login()" />
+    </div>
+  </div>
+</form>
+
+<div class="row">
+  <div class="col-12">
+    <span class="error">{{ msgError }}</span>
+  </div>
+</div>

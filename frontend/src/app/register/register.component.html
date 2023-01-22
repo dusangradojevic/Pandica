@@ -1,0 +1,83 @@
+<app-header></app-header>
+<hr />
+
+<div class="row">
+  <div class="col-12"><h3>Registracija</h3></div>
+</div>
+
+<form>
+  <div class="row">
+    <div class="col-12 col-md-4"><b>Ime*:</b></div>
+    <div class="col-12 col-md-4">
+      <input type="text" name="firstname" [(ngModel)]="user.firstname" />
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12 col-md-4"><b>Prezime*:</b></div>
+    <div class="col-12 col-md-4">
+      <input type="text" name="lastname" [(ngModel)]="user.lastname" />
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12 col-md-4"><b>Korisnicko ime*:</b></div>
+    <div class="col-12 col-md-4">
+      <input type="text" name="username" [(ngModel)]="user.username" />
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12 col-md-4"><b>Lozinka*:</b></div>
+    <div class="col-12 col-md-4">
+      <input type="password" name="password" [(ngModel)]="user.password" />
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12 col-md-4"><b>Potvrdite lozinku*:</b></div>
+    <div class="col-12 col-md-4">
+      <input
+        type="password"
+        name="confirmPassword"
+        [(ngModel)]="confirmPassword"
+      />
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12 col-md-4"><b>Telefon*:</b></div>
+    <div class="col-12 col-md-4">
+      <input type="text" name="phone" [(ngModel)]="user.phone" />
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12 col-md-4"><b>Email*:</b></div>
+    <div class="col-12 col-md-4">
+      <input type="email" name="email" [(ngModel)]="user.email" />
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12 col-md-4"><b>Tip*:</b></div>
+    <div class="col-12 col-md-4">
+      <select [(ngModel)]="user.type">
+        <option value="visitor" selected="true">Posetilac</option>
+        <option value="employee">Zaposleni</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <input type="button" value="Registruj se" (click)="register()" />
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <span class="error">{{ msgError }}</span>
+    </div>
+  </div>
+</form>
