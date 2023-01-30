@@ -1,23 +1,31 @@
 import * as express from "express";
 import User from "../model/user";
 
-const allowedExtensions: Array<String> = ["jpeg", "jpg", "png"];
-
 export class UserController {
-  getAllUsers = (req: express.Request, res: express.Response) => {
+  getAll = (req: express.Request, res: express.Response) => {
     User.find({}, (err: any, users: any) => {
       if (err) res.json({ message: "Error", errorMessage: err, users: [] });
       else res.json({ message: "Ok", users: users });
     });
   };
 
-  getUserById = (req: express.Request, res: express.Response) => {
+  getById = (req: express.Request, res: express.Response) => {
     const userId = req.body.id;
     User.findOne({ id: userId }, (err: any, user: any) => {
       if (err) {
         res.json({ message: "Error", errorMessage: "User does not exist." });
       } else {
         res.json({ message: "Ok", user: user });
+      }
+    });
+  };
+
+  getAllPending = (req: express.Request, res: express.Response) => {
+    User.find({ status: "pending" }, (err: any, users: any) => {
+      if (err) {
+        res.json({ message: "Error", errorMessage: "User does not exist." });
+      } else {
+        res.json({ message: "Ok", users: users });
       }
     });
   };
@@ -40,11 +48,11 @@ export class UserController {
 
     User.findOne({ username: username, password: password }, (err: any, user: any) => {
       if (err || user == null || !user) {
-        errors.push("Incorrect data.");
+        errors.push("Pogresni podaci.");
         res.json({ errors: errors });
       } else {
         if (user.status == "pending") {
-          errors.push("Admin did not accept this profile.");
+          errors.push("Admin nije odobrio ovaj nalog.");
           res.json({ errors: errors });
           return;
         }
@@ -103,7 +111,7 @@ export class UserController {
     });
   };
 
-  updateUserInfo = async (req: express.Request, res: express.Response) => {
+  update = async (req: express.Request, res: express.Response) => {
     const userId = parseInt(req.body.userId);
     const newUsername = req.body.username;
     const newEmail = req.body.email;
@@ -130,23 +138,21 @@ export class UserController {
       }
     }
 
-    // Update without photo
-    await User.collection.updateOne(
+    await User.updateOne(
       { id: userId },
       {
         $set: {
-          username: newUsername,
           firstname: req.body.firstname,
           lastname: req.body.lastname,
-          address: req.body.address,
-          phone: req.body.phone,
           email: newEmail,
+          username: newUsername,
+          phone: req.body.phone,
         },
       }
     );
 
     if (req.body.newPassword != "") {
-      User.collection.updateOne({ id: userId }, { $set: { password: req.body.newPassword } });
+      User.updateOne({ id: userId }, { $set: { password: req.body.newPassword } });
     }
 
     User.findOne({ id: userId }, (err: any, user: any) => {
@@ -159,7 +165,7 @@ export class UserController {
     });
   };
 
-  acceptUser = (req: express.Request, res: express.Response) => {
+  accept = (req: express.Request, res: express.Response) => {
     const userId = req.body.userId;
     User.updateOne({ id: userId, status: "pending" }, { status: "accepted" }, (err: any, resp: any) => {
       if (err) {
@@ -172,7 +178,7 @@ export class UserController {
     });
   };
 
-  rejectUser = (req: express.Request, res: express.Response) => {
+  reject = (req: express.Request, res: express.Response) => {
     let userId = req.body.userId;
     User.updateOne({ id: userId, status: "pending" }, { status: "rejected" }, (err: any, resp: any) => {
       if (err) {
@@ -185,7 +191,7 @@ export class UserController {
     });
   };
 
-  deleteUser = async (req: express.Request, res: express.Response) => {
+  remove = async (req: express.Request, res: express.Response) => {
     let userId = req.body.userId;
 
     let user = await User.findOne({ id: userId });

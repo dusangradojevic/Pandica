@@ -12,16 +12,16 @@ img {
 
 #header {
   min-height: 70px;
-  background-color: rgba(28, 190, 90, 0.8);
-}
-
-div.headerItem:hover {
-  background-color: rgba(28, 190, 90, 0.7);
-  cursor: pointer;
+  background-color: rgba(74, 191, 107, 1);
 }
 
 .headerText {
   color: white;
+}
+
+.headerButton {
+  padding-top: 20px;
+  text-align: center;
 }
 
 .headerItem {
@@ -29,18 +29,41 @@ div.headerItem:hover {
   text-align: center;
 }
 
-.headerItemList {
-  display: flex;
-  flex-direction: row;
+div.headerItem:hover {
+  background-color: rgba(28, 190, 90, 1);
+  cursor: pointer;
 }
 
-#headerProfilePicture {
+#headerPicture {
   padding-top: 15px;
 }
 
 .headerAppNameText {
   font-family: Brush Script MT;
-  font-size: x-large;
+  font-size: xx-large;
+}
+
+#headerMenu {
+  min-height: 30px;
+  background-color: rgba(170, 91, 66, 1);
+}
+
+.headerMenuItemList {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-left: 100px;
+  padding-right: 100px;
+}
+
+.headerMenuItem {
+  padding-top: 10px;
+  text-align: center;
+}
+
+div.headerMenuItem:hover {
+  background-color: rgb(157, 77, 53);
+  cursor: pointer;
 }
 
 /* Dropdown notifications */
@@ -55,7 +78,7 @@ div.headerItem:hover {
   position: absolute;
   background-color: #f1f1f1;
   min-width: 200px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
 }
 
@@ -66,8 +89,14 @@ div.headerItem:hover {
   display: block;
 }
 
-.dropdown-content p:hover {background-color: #ddd;}
+.dropdown-content p:hover {
+  background-color: #ddd;
+}
 
-.dropdown:hover .dropdown-content {display: block;}
+.dropdown:hover .dropdown-content {
+  display: block;
+}
 
-.dropdown:hover .dropbtn {background-color: #3e8e41;}
+.dropdown:hover .dropbtn {
+  background-color: #3e8e41;
+}

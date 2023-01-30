@@ -13,13 +13,45 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.initLoggedUser();
-
     this.currentPage = localStorage.getItem('currentPage');
   }
 
   user: User = null;
   notifications: Array<string> = new Array();
   currentPage: string = '';
+
+  logout() {
+    localStorage.removeItem('loggedUser');
+    this.router.navigate(['']);
+  }
+
+  initLoggedUser() {
+    this.user = null;
+    if (localStorage.getItem('loggedUser') != null) {
+      this.user = JSON.parse(localStorage.getItem('loggedUser'));
+
+      const data = {
+        id: this.user.id,
+      };
+      this.userService.getById(data).subscribe((res: any) => {
+        if (res.message == 'Ok') {
+          localStorage.setItem('loggedUser', JSON.stringify(res.user));
+          this.user = res.user;
+        }
+      });
+    }
+  }
+
+  // GOTO - General
+
+  goToHomePage() {
+    if (localStorage.getItem('loggedUser') != null) {
+      const userType = JSON.parse(localStorage.getItem('loggedUser')).type;
+      this.router.navigate([userType]);
+    } else {
+      this.router.navigate(['']);
+    }
+  }
 
   goToLogin() {
     localStorage.setItem('currentPage', 'login');
@@ -31,50 +63,43 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(['register']);
   }
 
-  toHomePage() {
-    if (localStorage.getItem('loggedUser') != null) {
-      const userType = JSON.parse(localStorage.getItem('loggedUser')).type;
-      this.router.navigate([userType]);
-    } else {
-      this.router.navigate(['']);
-    }
-  }
-
-  logout() {
-    localStorage.removeItem('loggedUser');
-    this.router.navigate(['']);
-  }
-
   goToUserProfile() {
     this.router.navigate(['userProfile']);
   }
 
-  goToSearch() {
-    this.router.navigate(['readerSearch']);
+  // GOTO - Visitor
+
+  goToVisitorTickets() {
+    this.router.navigate(['visitorTickets']);
   }
 
-  goToRentedBooks() {
-    this.router.navigate(['rentedBooks']);
+  goToVisitorEvents() {
+    this.router.navigate(['visitorEvents']);
   }
 
-  goToRentHistory() {
-    this.router.navigate(['rentHistory']);
+  goToVisitorAnimals() {
+    this.router.navigate(['visitorAnimals']);
   }
 
-  initLoggedUser() {
-    this.user = null;
-    if (localStorage.getItem('loggedUser') != null) {
-      this.user = JSON.parse(localStorage.getItem('loggedUser'));
+  goToVisitorContact() {
+    this.router.navigate(['visitorContact']);
+  }
 
-      const dataUser = {
-        id: this.user.id,
-      };
-      this.userService.getUserById(dataUser).subscribe((res: any) => {
-        if (res.message == 'Ok') {
-          localStorage.setItem('loggedUser', JSON.stringify(res.user));
-          this.user = res.user;
-        }
-      });
-    }
+  // GOTO - Employee
+
+  goToEmployeeTickets() {
+    this.router.navigate(['employeeTickets']);
+  }
+
+  goToEmployeeAnimals() {
+    this.router.navigate(['employeeAnimals']);
+  }
+
+  goToEmployeePromo() {
+    this.router.navigate(['employeePromo']);
+  }
+
+  goToEmployeeEvents() {
+    this.router.navigate(['employeeEvents']);
   }
 }

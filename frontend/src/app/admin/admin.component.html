@@ -1,4 +1,90 @@
 <app-header></app-header>
+
+<br />
+
+<div class="row">
+  <div class="col-12">
+    <h3>Zahtevi za registraciju</h3>
+  </div>
+</div>
+
 <hr />
 
-<p>admin works!</p>
+<div class="content">
+  <div class="row" *ngIf="users != null && users.length == 0">
+    <div class="col-md-12">Nema zahteva za registraciju.</div>
+  </div>
+
+  <div class="row" *ngIf="users != null && users.length > 0">
+    <div class="col-md-1 offset-md-3"><b>Ime</b></div>
+    <div class="col-md-1"><b>Prezime</b></div>
+    <div class="col-md-1"><b>Email</b></div>
+    <div class="col-md-1"><b>Korisnicko ime</b></div>
+    <div class="col-md-1"><b>Telefon</b></div>
+    <div class="col-md-1"><b>Tip</b></div>
+  </div>
+
+  <div class="row" *ngFor="let user of users">
+    <div class="col-md-1 offset-md-3">{{ user.firstname }}</div>
+    <div class="col-md-1">{{ user.lastname }}</div>
+    <div class="col-md-1">{{ user.email }}</div>
+    <div class="col-md-1">{{ user.username }}</div>
+    <div class="col-md-1">{{ user.phone }}</div>
+    <div class="col-md-1" *ngIf="user.type == 'visitor'">Posetilac</div>
+    <div class="col-md-1" *ngIf="user.type == 'employee'">Zaposleni</div>
+    <div class="col-md-2">
+      <input
+        class="btn buttonGreen"
+        type="button"
+        value="Prihvati"
+        (click)="acceptUser(user.id)"
+      />
+      &nbsp;
+      <input
+        type="button"
+        class="btn buttonGreen"
+        value="Odbij"
+        (click)="rejectUser(user.id)"
+      />
+    </div>
+  </div>
+  <!-- <div class="row justify-content-center">
+    <table *ngIf="users != null && users.length > 0">
+      <thead>
+        <th>Ime</th>
+        <th>Prezime</th>
+        <th>Email</th>
+        <th>Korisnicko ime</th>
+        <th>Telefon</th>
+        <th>Tip</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users">
+          <td>{{ user.firstname }}</td>
+          <td>{{ user.lastname }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.username }}</td>
+          <td>{{ user.phone }}</td>
+          <td *ngIf="user.type == 'visitor'">Posetilac</td>
+          <td *ngIf="user.type == 'employee'">Zaposleni</td>
+          <td>
+            <input
+              type="button"
+              class="btn btn-success"
+              value="Prihvati"
+              (click)="acceptUser(user.id)"
+            />
+          </td>
+          <td>
+            <input
+              type="button"
+              class="btn btn-success"
+              value="Odbij"
+              (click)="rejectUser(user.id)"
+            />
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div> -->
+</div>

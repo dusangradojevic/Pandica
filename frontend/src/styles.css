@@ -3,18 +3,23 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background-color: rgb(248, 255, 147);
+  background-color: rgba(243, 240, 151, 1);
 }
 
 .content {
-  align-items: center;
-  padding-left: 450px;
-  padding-right: 450px;
-  min-height: 907px;
+  min-height: 500px;
 }
 
 .error {
   color: red;
+}
+
+.alignRight {
+  text-align: right;
+}
+
+.alignLeft {
+  text-align: left;
 }
 
 .cursor {
@@ -27,6 +32,20 @@ h3 {
   text-align: center;
 }
 
-.hAlignLeft {
-  text-align: left;
+th,
+td {
+  text-align: center;
+}
+
+.buttonBrown {
+  background-color: rgba(170, 91, 66, 1);
+  color: white;
+  border: 1px black solid;
+  transition: all 100s ease-in-out;
+}
+
+.buttonGreen {
+  background-color: rgba(74, 191, 107, 1);
+  border: 1px black solid;
+  transition: all 100s ease-in-out;
 }

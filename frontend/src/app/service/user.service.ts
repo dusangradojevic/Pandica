@@ -2,31 +2,43 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserService {
   uri = 'http://localhost:4000';
 
   constructor(private http: HttpClient) {}
 
-  acceptUser(data){
-    return this.http.post(`${this.uri}/user/acceptUser`, data);
+  update(data) {
+    return this.http.post(`${this.uri}/user/update`, data);
   }
 
-  deleteUser(data){
-    return this.http.post(`${this.uri}/user/deleteUser`, data);
+  remove(data) {
+    return this.http.post(`${this.uri}/user/remove`, data);
   }
 
-  rejectUser(data){
-    return this.http.post(`${this.uri}/user/rejectUser`, data);
+  accept(data) {
+    return this.http.post(`${this.uri}/user/accept`, data);
+  }
+
+  reject(data) {
+    return this.http.post(`${this.uri}/user/reject`, data);
+  }
+
+  getAll() {
+    return this.http.get(`${this.uri}/user/getAll`);
+  }
+
+  getAllPending() {
+    return this.http.get(`${this.uri}/user/getAllPending`);
   }
 
   getUsernameById(data) {
     return this.http.post(`${this.uri}/user/getUsernameById`, data);
   }
 
-  getUserById(data){
-    return this.http.post(`${this.uri}/user/getUserById`, data);
+  getById(data) {
+    return this.http.post(`${this.uri}/user/getById`, data);
   }
 
   login(data) {

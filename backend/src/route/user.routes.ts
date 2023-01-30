@@ -14,12 +14,16 @@ userRouter.route("/getUsernameById").post((req, res) => {
   new UserController().getUsernameById(req, res);
 });
 
-userRouter.route("/getUserById").post((req, res) => {
-  new UserController().getUserById(req, res);
+userRouter.route("/getById").post((req, res) => {
+  new UserController().getById(req, res);
 });
 
-userRouter.route("/getAllUsers").get((req, res) => {
-  new UserController().getAllUsers(req, res);
+userRouter.route("/getAllPending").get((req, res) => {
+  new UserController().getAllPending(req, res);
+});
+
+userRouter.route("/getAll").get((req, res) => {
+  new UserController().getAll(req, res);
 });
 
 userRouter.route("/login").post((req, res) => {
@@ -39,14 +43,14 @@ userRouter.route("/login").post((req, res) => {
 });
 
 userRouter.route("/register").post((req, res) => {
-  req.checkBody("username", "Korisnicko ime mora biti popunjeno.").notEmpty();
-  req.checkBody("password", "Lozinka mora biti popunjena.").notEmpty();
-  req.checkBody("confirmPassword", "Morate potvrditi lozinku.").notEmpty();
   req.checkBody("firstname", "Ime mora biti popunjeno.").notEmpty();
   req.checkBody("lastname", "Prezime mora biti popunjeno.").notEmpty();
-  req.checkBody("phone", "Broj telefona mora biti popunjen.").notEmpty();
   req.checkBody("email", "Email mora biti popunjen.").notEmpty();
   req.checkBody("email", "Email mora biti u ispravnom formatu.").isEmail();
+  req.checkBody("username", "Korisnicko ime mora biti popunjeno.").notEmpty();
+  req.checkBody("phone", "Broj telefona mora biti popunjen.").notEmpty();
+  req.checkBody("password", "Lozinka mora biti popunjena.").notEmpty();
+  req.checkBody("confirmPassword", "Morate potvrditi lozinku.").notEmpty();
   req.checkBody("type", "Tip mora biti popunjen.").notEmpty();
 
   req.getValidationResult().then((result) => {
@@ -71,14 +75,13 @@ userRouter.route("/register").post((req, res) => {
   });
 });
 
-userRouter.route("/updateUserInfo").post((req, res) => {
-  req.checkBody("username", "Korisnicko ime mora biti popunjeno.").notEmpty();
+userRouter.route("/update").post((req, res) => {
   req.checkBody("firstname", "Ime mora biti popunjeno.").notEmpty();
   req.checkBody("lastname", "Prezime mora biti popunjeno.").notEmpty();
-  req.checkBody("address", "Adresa mora biti popunjena.").notEmpty();
-  req.checkBody("phone", "Broj telefona mora biti popunjen.").notEmpty();
   req.checkBody("email", "Email mora biti popunjen.").notEmpty();
   req.checkBody("email", "Email mora biti u ispravnom formatu.").isEmail();
+  req.checkBody("username", "Korisnicko ime mora biti popunjeno.").notEmpty();
+  req.checkBody("phone", "Broj telefona mora biti popunjen.").notEmpty();
 
   req.getValidationResult().then((result) => {
     let errors = [];
@@ -100,20 +103,20 @@ userRouter.route("/updateUserInfo").post((req, res) => {
 
     if (errors.length > 0) return res.json({ errors: errors });
 
-    new UserController().updateUserInfo(req, res);
+    new UserController().update(req, res);
   });
 });
 
-userRouter.route("/acceptUser").post((req, res) => {
-  new UserController().acceptUser(req, res);
+userRouter.route("/remove").post((req, res) => {
+  new UserController().remove(req, res);
 });
 
-userRouter.route("/deleteUser").post((req, res) => {
-  new UserController().deleteUser(req, res);
+userRouter.route("/accept").post((req, res) => {
+  new UserController().accept(req, res);
 });
 
-userRouter.route("/rejectUser").post((req, res) => {
-  new UserController().rejectUser(req, res);
+userRouter.route("/reject").post((req, res) => {
+  new UserController().reject(req, res);
 });
 
 export default userRouter;

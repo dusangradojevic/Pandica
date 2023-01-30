@@ -5,6 +5,9 @@ import expressValidator from "express-validator";
 import mongoose from "mongoose";
 import multer from "multer";
 import userRouter from "./route/user.routes";
+import animalRouter from "./route/animal.routes";
+import eventRouter from "./route/event.router";
+import promoPackageRouter from "./route/promo-package.routes";
 
 const app = express();
 
@@ -27,7 +30,9 @@ app.use(upload.single("photo"));
 
 const router = express.Router();
 router.use("/user", userRouter);
-
+router.use("/animal", animalRouter);
+router.use("/event", eventRouter);
+router.use("/promoPackage", promoPackageRouter);
 
 app.use("/", router);
 

@@ -32,7 +32,20 @@ export class LoginComponent implements OnInit {
       } else {
         localStorage.removeItem('currentPage');
         localStorage.setItem('loggedUser', JSON.stringify(res.user));
-        this.router.navigate([res.user.type]);
+        switch (res.user.type) {
+          case 'visitor': {
+            this.router.navigate(['visitorTickets']);
+            break;
+          }
+          case 'employee': {
+            this.router.navigate(['employeeTickets']);
+            break;
+          }
+          default: {
+            this.router.navigate(['admin']);
+            break;
+          }
+        }
       }
     });
   }
