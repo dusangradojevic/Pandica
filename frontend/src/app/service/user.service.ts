@@ -33,6 +33,10 @@ export class UserService {
     return this.http.get(`${this.uri}/user/getAllPending`);
   }
 
+  getByIds(data) {
+    return this.http.post(`${this.uri}/user/getByIds`, data);
+  }
+
   getUsernameById(data) {
     return this.http.post(`${this.uri}/user/getUsernameById`, data);
   }

@@ -9,6 +9,10 @@ export class PromoPackageService {
 
   constructor(private http: HttpClient) {}
 
+  getAll() {
+    return this.http.get(`${this.uri}/promoPackage/getAll`);
+  }
+
   insert(data) {
     return this.http.post(`${this.uri}/promoPackage/insert`, data);
   }
@@ -21,7 +25,7 @@ export class PromoPackageService {
     return this.http.post(`${this.uri}/promoPackage/remove`, data);
   }
 
-  getAll() {
-    return this.http.get(`${this.uri}/promoPackage/getAll`);
+  getByIds(data) {
+    return this.http.post(`${this.uri}/promoPackage/getByIds`, data);
   }
 }

@@ -6,7 +6,7 @@ import { EventService } from 'src/app/service/event.service';
 @Component({
   selector: 'app-employee-events',
   templateUrl: './employee-events.component.html',
-  styleUrls: ['./employee-events.component.css']
+  styleUrls: ['./employee-events.component.css'],
 })
 export class EmployeeEventsComponent implements OnInit {
   constructor(private eventService: EventService, private router: Router) {}
@@ -81,8 +81,8 @@ export class EmployeeEventsComponent implements OnInit {
 
   deleteEvent(eventIndex, eventId) {
     const data = {
-      eventIndex: eventIndex,
-      eventId: eventId,
+      eventIndex,
+      eventId,
     };
     this.eventService.remove(data).subscribe((res: any) => {
       if (res.message == 'Ok') {
@@ -101,7 +101,7 @@ export class EmployeeEventsComponent implements OnInit {
       const photoName = '' + event.photo;
 
       const data = {
-        photoName: photoName,
+        photoName,
       };
 
       this.eventService.getPhoto(data).subscribe({

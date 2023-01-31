@@ -19,4 +19,8 @@ promoPackageRouter.route("/remove").post((req, res) => {
   new PromoPackageController().remove(req, res);
 });
 
+promoPackageRouter.route("/getByIds").post((req, res) => {
+  new PromoPackageController().getByIds(req, res);
+});
+
 export default promoPackageRouter;

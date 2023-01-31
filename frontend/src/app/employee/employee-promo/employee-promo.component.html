@@ -99,8 +99,8 @@
       <input type="text" [(ngModel)]="changeName" *ngIf="changingInfo == i" />
     </div>
     <div class="col-12 col-md-2">
-      <p *ngIf="changingInfo != i && package.price != null">{{ package.price }}</p>
-      <p *ngIf="changingInfo != i && package.price == null">Besplatan</p>
+      <p *ngIf="changingInfo != i && package.price != 0">{{ package.price }}</p>
+      <p *ngIf="changingInfo != i && package.price == 0">Besplatan</p>
       <input type="text" [(ngModel)]="changePrice" *ngIf="changingInfo == i" />
     </div>
     <div class="col-12 col-md-2">

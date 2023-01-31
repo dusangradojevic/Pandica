@@ -31,6 +31,10 @@ export class EmployeePromoComponent implements OnInit {
   changeType: string;
 
   addPromoPackage() {
+    if (this.price == undefined) {
+      this.price = 0;
+    }
+
     const data = {
       name: this.name,
       price: this.price,
@@ -56,7 +60,7 @@ export class EmployeePromoComponent implements OnInit {
 
   submitChangingInfo(packageId) {
     const data = {
-      packageId: packageId,
+      packageId,
       name: this.changeName,
       price: this.changePrice,
       type: this.changeType,
@@ -80,7 +84,7 @@ export class EmployeePromoComponent implements OnInit {
 
   deletePromoPackage(packageId) {
     const data = {
-      packageId: packageId,
+      packageId,
     };
     this.promoPackageService.remove(data).subscribe((res: any) => {
       if (res.message == 'Ok') {

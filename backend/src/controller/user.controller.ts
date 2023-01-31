@@ -2,6 +2,25 @@ import * as express from "express";
 import User from "../model/user";
 
 export class UserController {
+  getByIds = async (req: express.Request, res: express.Response) => {
+    const userIds = req.body.userIds;
+    let usersReturn = [];
+    User.find({ id: { $in: userIds } }, (err: any, users: any) => {
+      if (err) {
+        res.json({ message: "Error", users: [], errorMessage: err });
+        return;
+      }
+      for (let i = 0; i < users.length; ++i) {
+        for (let j = 0; j < userIds.length; ++j) {
+          if (users[i].id == userIds[j]) {
+            usersReturn.push(users[i]);
+          }
+        }
+      }
+      res.json({ message: "Ok", users: usersReturn });
+    });
+  };
+
   getAll = (req: express.Request, res: express.Response) => {
     User.find({}, (err: any, users: any) => {
       if (err) res.json({ message: "Error", errorMessage: err, users: [] });

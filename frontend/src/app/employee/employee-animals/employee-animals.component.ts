@@ -81,8 +81,8 @@ export class EmployeeAnimalsComponent implements OnInit {
 
   deleteAnimal(animalIndex, animalId) {
     const data = {
-      animalIndex: animalIndex,
-      animalId: animalId,
+      animalIndex,
+      animalId,
     };
     this.animalService.remove(data).subscribe((res: any) => {
       if (res.message == 'Ok') {
@@ -101,7 +101,7 @@ export class EmployeeAnimalsComponent implements OnInit {
       const photoName = '' + animal.photo;
 
       const data = {
-        photoName: photoName,
+        photoName,
       };
 
       this.animalService.getPhoto(data).subscribe({

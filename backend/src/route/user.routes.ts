@@ -22,6 +22,10 @@ userRouter.route("/getAllPending").get((req, res) => {
   new UserController().getAllPending(req, res);
 });
 
+userRouter.route("/getByIds").post((req, res) => {
+  new UserController().getByIds(req, res);
+});
+
 userRouter.route("/getAll").get((req, res) => {
   new UserController().getAll(req, res);
 });

@@ -95,4 +95,23 @@ export class PromoPackageController {
       }
     });
   };
+
+  getByIds = async (req: express.Request, res: express.Response) => {
+    const packageIds = req.body.packageIds;
+    let packagesReturn = [];
+    PromoPackage.find({ id: { $in: packageIds } }, (err: any, packages: any) => {
+      if (err) {
+        res.json({ message: "Error", packages: [], errorMessage: err });
+        return;
+      }
+      for (let i = 0; i < packages.length; ++i) {
+        for (let j = 0; j < packageIds.length; ++j) {
+          if (packages[i].id == packageIds[j]) {
+            packagesReturn.push(packages[i]);
+          }
+        }
+      }
+      res.json({ message: "Ok", packages: packagesReturn });
+    });
+  };
 }

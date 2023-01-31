@@ -1,0 +1,22 @@
+[
+  {
+    "id": 0,
+    "name": "Tigar",
+    "description": "Bengalski",
+    "photo": "src/upload/animal_0.png"
+  },
+
+  {
+    "id": 1,
+    "name": "Lav",
+    "description": "Africki",
+    "photo": "src/upload/animal_1.jpeg"
+  },
+
+  {
+    "id": 2,
+    "name": "Orao",
+    "description": "Beloglavi",
+    "photo": "src/upload/animal_2.jpeg"
+  }
+]

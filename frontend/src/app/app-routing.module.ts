@@ -11,6 +11,7 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { VisitorContactComponent } from './visitor/visitor-contact/visitor-contact.component';
 import { VisitorEventsComponent } from './visitor/visitor-events/visitor-events.component';
 import { VisitorTicketsComponent } from './visitor/visitor-tickets/visitor-tickets.component';
+import { VisitorAnimalsComponent } from './visitor/visitor-animals/visitor-animals.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -20,7 +21,8 @@ const routes: Routes = [
   { path: 'admin', component: AdminComponent },
   { path: 'visitorTickets', component: VisitorTicketsComponent },
   { path: 'visitorEvents', component: VisitorEventsComponent },
-  { path: 'visitorAnimals', component: VisitorContactComponent },
+  { path: 'visitorAnimals', component: VisitorAnimalsComponent },
+  { path: 'visitorContact', component: VisitorContactComponent },
   { path: 'employeeTickets', component: EmployeeTicketsComponent },
   { path: 'employeeAnimals', component: EmployeeAnimalsComponent },
   { path: 'employeePromo', component: EmployeePromoComponent },

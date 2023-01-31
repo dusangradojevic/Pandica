@@ -8,6 +8,7 @@ import userRouter from "./route/user.routes";
 import animalRouter from "./route/animal.routes";
 import eventRouter from "./route/event.router";
 import promoPackageRouter from "./route/promo-package.routes";
+import ticketRouter from "./route/ticket.routes";
 
 const app = express();
 
@@ -33,6 +34,7 @@ router.use("/user", userRouter);
 router.use("/animal", animalRouter);
 router.use("/event", eventRouter);
 router.use("/promoPackage", promoPackageRouter);
+router.use("/ticket", ticketRouter);
 
 app.use("/", router);
 
