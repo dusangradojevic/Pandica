@@ -9,7 +9,7 @@ let Ticket = new Schema({
   userId: {
     type: Number,
   },
-  packageId: {
+  promoPackageId: {
     type: Number,
   },
   quantity: {
