@@ -3,30 +3,24 @@ import PromoCode from "../model/promo-code";
 
 export class PromoCodeController {
   insert = async (req: express.Request, res: express.Response) => {
-    const userId = req.body.userId;
-    const packageId = req.body.packageId;
+    const code = req.body.code;
+    const discount = req.body.discount;
     const quantity = req.body.quantity;
-    const price = req.body.price;
-    const promoCodeId = req.body.promoCodeId;
-    const status = req.body.status;
 
-    const tickets = await PromoCode.find().sort({ id: -1 }).limit(1);
-    let newTicketId = 0;
-    if (tickets.length > 0) {
-      newTicketId = tickets[0].id + 1;
+    const promoCodes = await PromoCode.find().sort({ id: -1 }).limit(1);
+    let newPromoCodeId = 0;
+    if (promoCodes.length > 0) {
+      newPromoCodeId = promoCodes[0].id + 1;
     }
 
-    const newTicket = new PromoCode({
-      id: newTicketId,
-      userId: userId,
-      packageId: packageId,
-      quantity: quantity,
-      price: price,
-      promoCodeId: promoCodeId,
-      status: status,
+    const newPromoCode = new PromoCode({
+      id: newPromoCodeId,
+      code,
+      discount,
+      quantity,
     });
 
-    newTicket
+    newPromoCode
       .save()
       .then(() => {
         res.status(200).json({ message: "Ok" });

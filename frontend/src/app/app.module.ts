@@ -20,6 +20,7 @@ import { EmployeePromoComponent } from './employee/employee-promo/employee-promo
 import { EmployeeEventsComponent } from './employee/employee-events/employee-events.component';
 import { AdminComponent } from './admin/admin.component';
 import { AnimalDetailsComponent } from './animal-details/animal-details.component';
+import { EmployeePromoCodesComponent } from './employee/employee-promo-codes/employee-promo-codes.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { AnimalDetailsComponent } from './animal-details/animal-details.componen
     EmployeeEventsComponent,
     AdminComponent,
     AnimalDetailsComponent,
+    EmployeePromoCodesComponent,
   ],
   imports: [
     BrowserModule,

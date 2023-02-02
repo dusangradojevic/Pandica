@@ -52,7 +52,10 @@
 
 <div class="row" id="headerMenu">
   <!-- Visitor header menu -->
-  <div class="col-12 col-md-12 headerMenuItemList" *ngIf="user != null && user.type == 'visitor'">
+  <div
+    class="col-12 col-md-12 headerMenuItemList"
+    *ngIf="user != null && user.type == 'visitor'"
+  >
     <div class="headerMenuItem" (click)="goToVisitorTickets()">
       <p class="headerText">Kupovina ulaznica</p>
     </div>
@@ -81,13 +84,18 @@
       <p class="headerText">Obavestenja</p>
       <div class="dropdown-content">
         <p *ngIf="user.notifications.length == 0">Nemate novih obavestenja</p>
-        <p *ngFor="let notification of user.notifications">{{ notification }}</p>
+        <p *ngFor="let notification of user.notifications">
+          {{ notification }}
+        </p>
       </div>
     </div>
   </div>
 
   <!-- Employee header menu -->
-  <div class="col-12 col-md-12 headerMenuItemList" *ngIf="user != null && user.type == 'employee'">
+  <div
+    class="col-12 col-md-12 headerMenuItemList"
+    *ngIf="user != null && user.type == 'employee'"
+  >
     <div class="headerMenuItem" (click)="goToEmployeeTickets()">
       <p class="headerText">Ulaznice</p>
     </div>
@@ -108,6 +116,12 @@
 
     <div class="headerMenuItem" (click)="goToEmployeeEvents()">
       <p class="headerText">Desavanja</p>
+    </div>
+
+    &nbsp;&nbsp;&nbsp;
+
+    <div class="headerMenuItem" (click)="goToEmployeePromoCodes()">
+      <p class="headerText">Promo kodovi</p>
     </div>
   </div>
 </div>

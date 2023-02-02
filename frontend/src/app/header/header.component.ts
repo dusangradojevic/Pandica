@@ -102,4 +102,8 @@ export class HeaderComponent implements OnInit {
   goToEmployeeEvents() {
     this.router.navigate(['employeeEvents']);
   }
+
+  goToEmployeePromoCodes() {
+    this.router.navigate(['employeePromoCodes']);
+  }
 }

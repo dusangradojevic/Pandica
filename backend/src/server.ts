@@ -10,6 +10,7 @@ import eventRouter from "./route/event.router";
 import promoPackageRouter from "./route/promo-package.routes";
 import ticketRouter from "./route/ticket.routes";
 import commentRouter from "./route/comment.routes";
+import promoCodeRouter from "./route/promo-code.routes";
 
 const app = express();
 
@@ -35,6 +36,7 @@ router.use("/user", userRouter);
 router.use("/animal", animalRouter);
 router.use("/event", eventRouter);
 router.use("/promoPackage", promoPackageRouter);
+router.use("/promoCode", promoCodeRouter);
 router.use("/ticket", ticketRouter);
 router.use("/comment", commentRouter);
 
