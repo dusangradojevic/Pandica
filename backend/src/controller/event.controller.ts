@@ -1,6 +1,7 @@
 import * as express from "express";
 import fs from "fs";
 import Event from "../model/event";
+import Like from "../model/like";
 
 const allowedExtensions: Array<String> = ["jpeg", "jpg", "png"];
 
@@ -55,6 +56,7 @@ export class EventController {
         name: newName,
         description: newDescription,
         photo: picName,
+        likes: 0,
       });
 
       newEvent
@@ -115,13 +117,13 @@ export class EventController {
 
   remove = async (req: express.Request, res: express.Response) => {
     const eventId = req.body.eventId;
-
     const event = await Event.findOne({ id: eventId });
-
     if (!event || event == null) {
       res.json({ message: "Error", errorMessage: "Neocekivana greska." });
       return;
     }
+
+    await Like.deleteMany({ eventId: eventId });
 
     Event.deleteOne({ id: eventId }, (err: any, resp: any) => {
       if (err) {
@@ -139,5 +141,61 @@ export class EventController {
     let buffer: Buffer = fs.readFileSync("./" + photoName);
     res.contentType("image/jpeg");
     res.send(buffer);
+  };
+
+  getLikedEventsFlags = async (req: express.Request, res: express.Response) => {
+    const userId = req.body.userId;
+    const eventIds = req.body.eventIds;
+    let eventFlags = [];
+    for (let i = 0; i < eventIds.length; ++i) {
+      const like = await Like.findOne({ userId: userId, eventId: eventIds[i] });
+      eventFlags.push(like == null ? true : false);
+    }
+    res.json({ message: "Ok", eventFlags: eventFlags });
+  };
+
+  like = async (req: express.Request, res: express.Response) => {
+    const userId = req.body.userId;
+    const eventId = req.body.eventId;
+
+    const likes = await Like.find().sort({ id: -1 }).limit(1);
+    let newLikeId = 0;
+    if (likes.length > 0) {
+      newLikeId = likes[0].id + 1;
+    }
+
+    const event = await Event.findOne({ id: eventId });
+    await Event.updateOne({ id: eventId }, { $set: { likes: event.likes + 1 } });
+
+    const newLike = new Like({
+      id: newLikeId,
+      userId: userId,
+      eventId: eventId,
+    });
+
+    newLike
+      .save()
+      .then(() => {
+        res.status(200).json({ message: "Ok" });
+      })
+      .catch(() => {
+        res.json({ message: "Error" });
+      });
+  };
+
+  dislike = async (req: express.Request, res: express.Response) => {
+    const userId = req.body.userId;
+    const eventId = req.body.eventId;
+
+    const event = await Event.findOne({ id: eventId });
+    await Event.updateOne({ id: eventId }, { $set: { likes: event.likes - 1 } });
+
+    Like.deleteOne({ userId: userId, eventId: eventId }, (err: any, resp: any) => {
+      if (err) {
+        res.json({ message: "Error", errorMessage: "Neocekivana greska." });
+      } else {
+        res.json({ message: "Ok" });
+      }
+    });
   };
 }

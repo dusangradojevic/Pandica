@@ -96,6 +96,17 @@ export class PromoPackageController {
     });
   };
 
+  getById = (req: express.Request, res: express.Response) => {
+    const packageId = req.body.id;
+    PromoPackage.findOne({ id: packageId }, (err: any, promoPackage: any) => {
+      if (err) {
+        res.json({ message: "Error", errorMessage: "Package does not exist." });
+      } else {
+        res.json({ message: "Ok", promoPackage: promoPackage });
+      }
+    });
+  };
+
   getByIds = async (req: express.Request, res: express.Response) => {
     const packageIds = req.body.packageIds;
     let packagesReturn = [];

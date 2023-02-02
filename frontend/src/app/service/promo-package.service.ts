@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PromoPackageService {
   uri = 'http://localhost:4000';
@@ -23,6 +23,10 @@ export class PromoPackageService {
 
   remove(data) {
     return this.http.post(`${this.uri}/promoPackage/remove`, data);
+  }
+
+  getById(data) {
+    return this.http.post(`${this.uri}/promoPackage/getById`, data);
   }
 
   getByIds(data) {

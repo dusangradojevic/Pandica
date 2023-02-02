@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class EventService {
   uri = 'http://localhost:4000';
@@ -29,5 +29,17 @@ export class EventService {
     return this.http.post(`${this.uri}/event/getPhoto`, data, {
       responseType: 'blob',
     });
+  }
+
+  getLikedEventsFlags(data) {
+    return this.http.post(`${this.uri}/event/getLikedEventsFlags`, data);
+  }
+
+  like(data) {
+    return this.http.post(`${this.uri}/event/like`, data);
+  }
+
+  dislike(data) {
+    return this.http.post(`${this.uri}/event/dislike`, data);
   }
 }

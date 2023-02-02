@@ -1,5 +1,6 @@
 import * as express from "express";
 import Ticket from "../model/ticket";
+import PromoCode from "../model/promo-code";
 
 export class TicketController {
   getAllPending = (req: express.Request, res: express.Response) => {
@@ -14,10 +15,10 @@ export class TicketController {
 
   insert = async (req: express.Request, res: express.Response) => {
     const userId = req.body.userId;
-    const packageId = req.body.packageId;
+    const promoPackageId = req.body.promoPackageId;
     const quantity = req.body.quantity;
-    const price = req.body.price;
-    const promoCodeId = req.body.promoCodeId;
+    let price = req.body.price;
+    const promoCodeCode = req.body.promoCode;
     const status = req.body.status;
 
     const tickets = await Ticket.find().sort({ id: -1 }).limit(1);
@@ -26,12 +27,22 @@ export class TicketController {
       newTicketId = tickets[0].id + 1;
     }
 
+    let promoCodeId = -1;
+    if (promoCodeCode != -1) {
+      const promoCode = await PromoCode.findOne({ code: promoCodeCode });
+      if (promoCode && promoCode != null && promoCode.quantity > 0) {
+        await PromoCode.updateOne({ id: promoCode.id }, { $set: { quantity: promoCode.quantity - 1 } });
+        promoCodeId = promoCode.id;
+        price = (price * (100 - promoCode.discount)) / 100;
+      }
+    }
+
     const newTicket = new Ticket({
       id: newTicketId,
       userId: userId,
-      packageId: packageId,
+      promoPackageId: promoPackageId,
       quantity: quantity,
-      price: price,
+      price,
       promoCodeId: promoCodeId,
       status: status,
     });

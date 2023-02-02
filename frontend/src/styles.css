@@ -49,3 +49,9 @@ td {
   border: 1px black solid;
   transition: all 100s ease-in-out;
 }
+
+.buttonYellow {
+  background-color: rgba(243, 240, 151, 1);
+  border: 1px black solid;
+  transition: all 100s ease-in-out;
+}

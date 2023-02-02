@@ -15,6 +15,9 @@ let Event = new Schema({
   photo: {
     type: String,
   },
+  likes: {
+    type: Number,
+  },
 });
 
 export default mongoose.model("Event", Event, "events");

@@ -23,4 +23,16 @@ eventRouter.route("/getPhoto").post((req, res) => {
   new EventController().getPhoto(req, res);
 });
 
+eventRouter.route("/getLikedEventsFlags").post((req, res) => {
+  new EventController().getLikedEventsFlags(req, res);
+});
+
+eventRouter.route("/like").post((req, res) => {
+  new EventController().like(req, res);
+});
+
+eventRouter.route("/dislike").post((req, res) => {
+  new EventController().dislike(req, res);
+});
+
 export default eventRouter;

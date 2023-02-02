@@ -9,6 +9,9 @@ let PromoCode = new Schema({
   code: {
     type: String,
   },
+  discount: {
+    type: Number,
+  },
   quantity: {
     type: Number,
   },

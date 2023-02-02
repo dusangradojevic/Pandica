@@ -19,6 +19,10 @@ promoPackageRouter.route("/remove").post((req, res) => {
   new PromoPackageController().remove(req, res);
 });
 
+promoPackageRouter.route("/getById").post((req, res) => {
+  new PromoPackageController().getById(req, res);
+});
+
 promoPackageRouter.route("/getByIds").post((req, res) => {
   new PromoPackageController().getByIds(req, res);
 });

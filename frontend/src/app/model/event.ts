@@ -3,4 +3,5 @@ export class Event {
   name: string = '';
   description: string = '';
   photo: File;
+  likes: number;
 }
