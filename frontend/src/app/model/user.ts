@@ -6,6 +6,7 @@ export class User {
   lastname: string = '';
   phone: string = '';
   email: string = '';
+  notifications: Array<string> = [];
   type: string = 'visitor';
   status: string = '';
 }

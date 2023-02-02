@@ -1,6 +1,8 @@
 import * as express from "express";
 import Ticket from "../model/ticket";
 import PromoCode from "../model/promo-code";
+import User from "../model/user";
+import PromoPackage from "../model/promo-package";
 
 export class TicketController {
   getAllPending = (req: express.Request, res: express.Response) => {
@@ -58,32 +60,66 @@ export class TicketController {
   };
 
   accept = async (req: express.Request, res: express.Response) => {
-    const ticketId = parseInt(req.body.ticketId);
+    const userId = req.body.userId;
+    const ticketId = req.body.ticketId;
     await Ticket.updateOne({ id: ticketId }, { $set: { status: "accepted" } });
 
     let errors: Array<String> = [];
-    Ticket.findOne({ id: ticketId }, (err: any, ticket: any) => {
-      if (err || ticket == null || !ticket) {
-        errors.push("Doslo je do greske prilikom azuriranja podataka.");
-        res.json({ errors: errors });
-      } else {
-        res.status(200).json({ ticket: ticket });
+    const ticket = await Ticket.findOne({ id: ticketId });
+    if (ticket == null || !ticket) {
+      errors.push("Doslo je do greske prilikom azuriranja podataka.");
+      res.json({ errors: errors });
+    }
+    const promoPackage = await PromoPackage.findOne({ id: ticket.promoPackageId });
+    let notification = "Vas zahtev za ulaznicu: '" + promoPackage.name + "' kolicine: " + ticket.quantity;
+    if (ticket.promoCodeId != -1) {
+      const promoCode = await PromoCode.findOne({ id: ticket.promoCodeId });
+      notification += " sa iskoriscenim promo kodom: " + promoCode.code;
+    }
+    notification += " je odobren.";
+    await User.updateOne(
+      { id: userId },
+      {
+        $push: {
+          notifications: {
+            $each: [notification],
+            $position: 0,
+          },
+        },
       }
-    });
+    );
+    res.status(200).json({ ticket: ticket });
   };
 
   reject = async (req: express.Request, res: express.Response) => {
-    const ticketId = parseInt(req.body.ticketId);
+    const userId = req.body.userId;
+    const ticketId = req.body.ticketId;
     await Ticket.updateOne({ id: ticketId }, { $set: { status: "rejected" } });
 
     let errors: Array<String> = [];
-    Ticket.findOne({ id: ticketId }, (err: any, ticket: any) => {
-      if (err || ticket == null || !ticket) {
-        errors.push("Doslo je do greske prilikom azuriranja podataka.");
-        res.json({ errors: errors });
-      } else {
-        res.status(200).json({ ticket: ticket });
+    const ticket = await Ticket.findOne({ id: ticketId });
+    if (ticket == null || !ticket) {
+      errors.push("Doslo je do greske prilikom azuriranja podataka.");
+      res.json({ errors: errors });
+    }
+    const promoPackage = await PromoPackage.findOne({ id: ticket.promoPackageId });
+    let notification = "Vas zahtev za ulaznicu: '" + promoPackage.name + "' kolicine: " + ticket.quantity;
+    if (ticket.promoCodeId != -1) {
+      const promoCode = await PromoCode.findOne({ id: ticket.promoCodeId });
+      notification += " sa iskoriscenim promo kodom: " + promoCode.code;
+    }
+    notification += " je odbijen.";
+    await User.updateOne(
+      { id: userId },
+      {
+        $push: {
+          notifications: {
+            $each: [notification],
+            $position: 0,
+          },
+        },
       }
-    });
+    );
+    res.status(200).json({ ticket: ticket });
   };
 }

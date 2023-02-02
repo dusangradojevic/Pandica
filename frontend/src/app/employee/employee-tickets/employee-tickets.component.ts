@@ -50,8 +50,9 @@ export class EmployeeTicketsComponent implements OnInit {
   users: Array<User> = new Array();
   promoPackages: Array<PromoPackage> = new Array();
 
-  acceptTicket(ticketId) {
+  acceptTicket(userId, ticketId) {
     const data = {
+      userId,
       ticketId,
     };
     this.ticketService.accept(data).subscribe((res: any) => {
@@ -62,8 +63,9 @@ export class EmployeeTicketsComponent implements OnInit {
     });
   }
 
-  rejectTicket(ticketId) {
+  rejectTicket(userId, ticketId) {
     const data = {
+      userId,
       ticketId,
     };
     this.ticketService.reject(data).subscribe((res: any) => {

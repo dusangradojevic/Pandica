@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Animal } from 'src/app/model/animal';
 import { AnimalService } from 'src/app/service/animal.service';
 
@@ -8,7 +9,7 @@ import { AnimalService } from 'src/app/service/animal.service';
   styleUrls: ['./visitor-animals.component.css'],
 })
 export class VisitorAnimalsComponent implements OnInit {
-  constructor(private animalService: AnimalService) {}
+  constructor(private animalService: AnimalService, private router: Router) {}
 
   ngOnInit(): void {
     this.animalService.getAll().subscribe((res: any) => {
@@ -33,6 +34,11 @@ export class VisitorAnimalsComponent implements OnInit {
     if (this.animalIterator - 5 >= 0) {
       this.animalIterator -= 5;
     }
+  }
+
+  goToAnimalDetails(animal) {
+    localStorage.setItem('currentAnimal', JSON.stringify(animal));
+    this.router.navigate(['animalDetails']);
   }
 
   initPictures() {

@@ -24,6 +24,11 @@ let User = new Schema({
   email: {
     type: String,
   },
+  notifications: [
+    {
+      type: String,
+    },
+  ],
   type: {
     type: String,
   },

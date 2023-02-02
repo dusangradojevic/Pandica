@@ -80,8 +80,8 @@
     <div class="headerMenuItem dropdown">
       <p class="headerText">Obavestenja</p>
       <div class="dropdown-content">
-        <p *ngIf="notifications.length == 0">Nemate novih obavestenja</p>
-        <p *ngFor="let notification of notifications">{{ notification }}</p>
+        <p *ngIf="user.notifications.length == 0">Nemate novih obavestenja</p>
+        <p *ngFor="let notification of user.notifications">{{ notification }}</p>
       </div>
     </div>
   </div>

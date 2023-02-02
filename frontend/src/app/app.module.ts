@@ -19,6 +19,7 @@ import { EmployeeAnimalsComponent } from './employee/employee-animals/employee-a
 import { EmployeePromoComponent } from './employee/employee-promo/employee-promo.component';
 import { EmployeeEventsComponent } from './employee/employee-events/employee-events.component';
 import { AdminComponent } from './admin/admin.component';
+import { AnimalDetailsComponent } from './animal-details/animal-details.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { AdminComponent } from './admin/admin.component';
     EmployeePromoComponent,
     EmployeeEventsComponent,
     AdminComponent,
+    AnimalDetailsComponent,
   ],
   imports: [
     BrowserModule,

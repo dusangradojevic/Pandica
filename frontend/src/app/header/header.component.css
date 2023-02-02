@@ -91,12 +91,9 @@ div.headerMenuItem:hover {
 
 .dropdown-content p:hover {
   background-color: #ddd;
+  /* background-color: rgb(157, 77, 53); */
 }
 
 .dropdown:hover .dropdown-content {
   display: block;
-}
-
-.dropdown:hover .dropbtn {
-  background-color: #3e8e41;
 }

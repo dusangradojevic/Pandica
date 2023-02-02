@@ -34,14 +34,14 @@
         class="btn buttonGreen"
         type="button"
         value="Odobri"
-        (click)="acceptTicket(ticket.id)"
+        (click)="acceptTicket(users[i].id, ticket.id)"
       />
       &nbsp;
       <input
         type="button"
         class="btn buttonGreen"
         value="Odbij"
-        (click)="rejectTicket(ticket.id)"
+        (click)="rejectTicket(users[i].id, ticket.id)"
       />
     </div>
   </div>

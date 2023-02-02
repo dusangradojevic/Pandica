@@ -7,6 +7,7 @@
     "lastname": "Adminic",
     "phone": "065123482",
     "email": "admin@mail.com",
+    "notifications": [],
     "type": "admin",
     "status": "accepted"
   },
@@ -19,6 +20,7 @@
     "lastname": "Poseticic",
     "phone": "42134312",
     "email": "visitor@mail.com",
+    "notifications": ["Dobrodosli na sajt zooloskog vrta \"Pandica\"!"],
     "type": "visitor",
     "status": "accepted"
   },
@@ -31,6 +33,7 @@
     "lastname": "Zaposlenic",
     "phone": "555-333",
     "email": "employee@mail.com",
+    "notifications": [],
     "type": "employee",
     "status": "accepted"
   }

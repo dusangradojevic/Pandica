@@ -12,11 +12,13 @@ import { VisitorContactComponent } from './visitor/visitor-contact/visitor-conta
 import { VisitorEventsComponent } from './visitor/visitor-events/visitor-events.component';
 import { VisitorTicketsComponent } from './visitor/visitor-tickets/visitor-tickets.component';
 import { VisitorAnimalsComponent } from './visitor/visitor-animals/visitor-animals.component';
+import { AnimalDetailsComponent } from './animal-details/animal-details.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'animalDetails', component: AnimalDetailsComponent },
   { path: 'userProfile', component: UserProfileComponent },
   { path: 'admin', component: AdminComponent },
   { path: 'visitorTickets', component: VisitorTicketsComponent },

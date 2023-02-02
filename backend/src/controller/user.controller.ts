@@ -114,6 +114,7 @@ export class UserController {
           lastname: req.body.lastname,
           phone: req.body.phone,
           email: req.body.email,
+          notifications: ['Dobrodosli na sajt zooloskog vrta "Pandica"!'],
           type: req.body.type,
           status: req.body.status,
         });
